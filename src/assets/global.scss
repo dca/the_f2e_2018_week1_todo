@@ -1,0 +1,47 @@
+$lightBlue   : #4a90e2;
+$darkBlue    : #00408b;
+$Red         : #d0021b;
+$lightYellow : #fff2dc;
+$darkYellow  : #f5a623;
+$lightWhite  : #f2f2f2;
+$White       : #fff;
+$darkWhite   : #e1e1e1;
+$lightGrey   : #c8c8c8;
+$Grey        : #757575;
+$Black       : #000;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@mixin title {
+	font-family: 'Roboto Medium', sans-serif;
+    font-size: 24px;
+    color: $Black;
+}
+
+@mixin subtitle {
+	font-family: 'Roboto Medium', sans-serif;
+    font-size: 20px;
+    color: $Black;
+}
+
+@mixin paragraph {
+	font-family: 'Roboto Regular', sans-serif;
+    font-size: 16px;
+    color: $Black;
+}
+
+@mixin remark {
+	@include paragraph;
+    color: $Grey;
+}
+
+@mixin placeholder {
+	@include paragraph;
+    color: $Grey;
+}
+
+@mixin status-italic {
+	font-family: 'Roboto Italic', sans-serif;
+	font-size: 24px;
+	font-style: italic;
+}
