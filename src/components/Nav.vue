@@ -19,7 +19,7 @@ import { Component, Prop, Provide, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NavComponent extends Vue {
-  @Provide() activeIndex: string = 'my_tesk';
+  @Provide() private activeIndex: string = 'my_tesk';
 
   private handleSelect(key: string, keyPath: any): void {
     this.activeIndex = key;

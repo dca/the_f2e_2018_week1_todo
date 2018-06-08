@@ -1,18 +1,17 @@
 <template>
   <el-card class="todo-card" shadow="never" :body-style="{ padding: '0px', 'padding-top': '24px', background: '#FFF2DC', height: '102px' }">
-    <el-row>
-      <el-col :span="3"><el-checkbox></el-checkbox> </el-col>
-      <el-col :span="17"><span class="title">{{ title }}</span></el-col>
+    <el-row v-on:click="handleCompleted">
+      <el-col :span="3"><div class="mycheckbox" v-bind:class="{ complated: isComplated }" v-on:click="handleCompleted"><font-awesome-icon :icon="['fas', 'check']" /></div></el-col>
+      <el-col :span="17"><span class="title" v-bind:class="{ complated: isComplated }" v-on:click="handleCompleted">Type Something Here…</span></el-col>
       <el-col :span="2" class="edit-icon"><font-awesome-icon :icon="['far', 'star']" /></el-col>
       <el-col :span="2" class="edit-icon"><font-awesome-icon :icon="['fas', 'pencil-alt']" /></el-col>
-      <!-- <span class="title">{{ title }}</span>
-      <font-awesome-icon :icon="['fas', 'star']" />
-      <font-awesome-icon :icon="['far', 'star']" />
-      <font-awesome-icon :icon="['fas', 'calendar-alt']" />
-      <font-awesome-icon :icon="['far', 'file']" />
-      <font-awesome-icon :icon="['far', 'comments']" />
-      <font-awesome-icon :icon="['fas', 'pencil-alt']" /> -->
-
+    </el-row>
+    <el-row class="task-quick-info">
+      <el-col :span="21" :offset="3">
+        <font-awesome-icon class="fa" :icon="['fas', 'calendar-alt']" /> 5/14
+        <font-awesome-icon class="fa" :icon="['far', 'file']" />
+        <font-awesome-icon class="fa" :icon="['far', 'comments']" />
+      </el-col>
     </el-row>
   </el-card>
 </template>
@@ -25,7 +24,12 @@ import { Component, Prop, Provide, Vue } from 'vue-property-decorator';
   },
 })
 export default class TodoListCard extends Vue {
-  @Provide() title: string = 'Type Something Here…';
+  @Provide() private title: string = 'Type Something Here…';
+  @Provide() private isComplated: boolean = false;
+
+  private handleCompleted(key: string, keyPath: any): void {
+    this.isComplated = !this.isComplated;
+  }
 }
 </script>
 
@@ -43,11 +47,47 @@ export default class TodoListCard extends Vue {
     -moz-border-radius: $radius;
   }
 
+  .mycheckbox {
+    width: 24px;
+    height: 24px;
+    background-color: #FFF;
+    margin: 0 auto;
+    color: #FFF;
+
+    &.complated {
+      background: #4A90E2;
+      border-radius: 2px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 24px;
+    }
+  }
+
   .title {
     font-family: 'Roboto Medium';
     font-size: 24px;
     color: #000;
+    &.complated {
+      text-decoration: line-through;
+      font-family: Roboto-Medium;
+      font-size: 24px;
+      color: #9B9B9B;
+    }
   }
+
+  .task-quick-info {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #757575;
+
+    .fa {
+      font-size: 18px;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+
   .edit-icon {
     font-size: 24px;
   }

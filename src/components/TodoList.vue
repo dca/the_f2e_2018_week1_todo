@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="todo-card"></div>
-    <div class="todo-card"></div>
+    <TodoListCard />
+    <TodoListCard />
     <TodoListCard />
     <TodoListCard />
   </div>
@@ -25,14 +25,9 @@ export default class TodoList extends Vue {
 <style scoped lang="scss">
   $radius: 3px;
 
-  .todo-card {
-    width: 100%;
-    height: 102px;
-    background: #FFF2DC;
-    margin: 0;
-    margin-bottom: 8px;
-    border-radius: $radius;
-    -webkit-border-radius: $radius;
-    -moz-border-radius: $radius;
+
+
+  .edit-icon {
+    font-size: 24px;
   }
 </style>
