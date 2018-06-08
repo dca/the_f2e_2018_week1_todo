@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
 
 importScripts(
-  "/production-sub-path/precache-manifest.2061a80a7e41f1a88a7de03926795ec8.js"
+  "/the_f2e_2018_week1_todo/precache-manifest.ecc429c12099cba979df1065690601ff.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "the_f2e_2018_week1_todo"});
