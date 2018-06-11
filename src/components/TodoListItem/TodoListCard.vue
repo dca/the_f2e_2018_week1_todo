@@ -1,10 +1,19 @@
 <template>
-  <el-card class="todo-card" shadow="never" :body-style="{ padding: '0px', 'padding-top': '24px', background: '#FFF2DC', height: '102px' }">
+  <el-card class="todo-card" shadow="never" :body-style="{ padding: '0px', 'padding-top': '24px', background: getCardHeaderColor, height: '102px' }">
     <el-row v-on:click="handleCompleted">
       <el-col :span="3"><div class="mycheckbox" v-bind:class="{ complated: isComplated }" v-on:click="handleCompleted"><font-awesome-icon :icon="['fas', 'check']" /></div></el-col>
-      <el-col :span="17"><span class="title" v-bind:class="{ complated: isComplated }" v-on:click="handleCompleted">Type Something Here…</span></el-col>
-      <el-col :span="2" class="edit-icon"><font-awesome-icon :icon="['far', 'star']" /></el-col>
-      <el-col :span="2" class="edit-icon"><font-awesome-icon :icon="['fas', 'pencil-alt']" /></el-col>
+      <el-col :span="17">
+        <span class="title" v-bind:class="{ complated: isComplated }" v-on:click="handleCompleted">
+          {{ title }}
+        </span>
+      </el-col>
+      <el-col :span="2" class="edit-icon">
+        <font-awesome-icon :icon="['far', 'star']" v-show="!isStared" v-on:click="handleStared" />
+        <font-awesome-icon :icon="['fas', 'star']" v-show="isStared" v-on:click="handleStared" class="star" />
+      </el-col>
+      <el-col :span="2" class="edit-icon">
+        <font-awesome-icon :icon="['fas', 'pencil-alt']" />
+      </el-col>
     </el-row>
     <el-row class="task-quick-info">
       <el-col :span="21" :offset="3">
@@ -26,9 +35,18 @@ import { Component, Prop, Provide, Vue } from 'vue-property-decorator';
 export default class TodoListCard extends Vue {
   @Provide() private title: string = 'Type Something Here…';
   @Provide() private isComplated: boolean = false;
+  @Provide() private isStared: boolean = false;
 
   private handleCompleted(key: string, keyPath: any): void {
     this.isComplated = !this.isComplated;
+  }
+
+  private handleStared(key: string, keyPath: any): void {
+    this.isStared = !this.isStared;
+  }
+
+  get getCardHeaderColor(): string {
+    return this.isStared ? '#FFF2DC' : '#F2F2F2';
   }
 }
 </script>
@@ -61,6 +79,10 @@ export default class TodoListCard extends Vue {
       text-align: center;
       line-height: 24px;
     }
+  }
+
+  .star {
+    color: #F5A623;
   }
 
   .title {
